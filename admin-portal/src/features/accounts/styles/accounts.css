@@ -1,0 +1,1422 @@
+/**
+ * Accounts & Credit Management Stylesheet
+ * Pure Vanilla CSS - Strictly avoiding Tailwind
+ * Modeled after Stitch reference: 8._accounts_credit
+ */
+
+:root {
+  --acc-primary: #5145f5;
+  --acc-primary-dark: #3721de;
+  --acc-primary-light: #e1ddff;
+  --acc-primary-tint: #4b3ef0;
+  --acc-bg: #f9f9ff;
+  --acc-card-bg: #ffffff;
+  --acc-card-low: #f0f3ff;
+  --acc-card-high: #dfe8ff;
+  --acc-card-highest: #d9e3fa;
+  --acc-text: #121c2d;
+  --acc-text-muted: #464556;
+  --acc-outline: #777588;
+  --acc-border: #e2e8f0;
+  --acc-border-light: #edf2f7;
+
+  /* Semantic status colors */
+  --acc-danger: #ba1a1a;
+  --acc-danger-bg: #ffdad6;
+  --acc-danger-border: #fca5a5;
+  --acc-danger-text: #93000a;
+
+  --acc-emerald: #15803d;
+  --acc-emerald-bg: #dcfce7;
+  --acc-emerald-border: #86efac;
+
+  --acc-amber: #b45309;
+  --acc-amber-bg: #fef3c7;
+  --acc-amber-border: #fde68a;
+
+  --acc-tertiary: #3c4a73;
+  --acc-tertiary-container: #54628d;
+  --acc-secondary-container: #c9d3fe;
+
+  --acc-radius-sm: 6px;
+  --acc-radius-md: 10px;
+  --acc-radius-lg: 14px;
+  --acc-radius-xl: 18px;
+  --acc-radius-full: 9999px;
+
+  --acc-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --acc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --acc-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+}
+
+/* Page Shell & Viewport */
+.accounts-page-shell {
+  min-height: 100vh;
+  background-color: var(--acc-bg);
+  color: var(--acc-text);
+  display: flex;
+}
+
+.accounts-content-viewport {
+  flex: 1;
+  min-width: 0;
+  margin-left: 260px;
+  transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.accounts-content-viewport.sidebar-collapsed {
+  margin-left: 80px;
+}
+
+@media (max-width: 1024px) {
+  .accounts-content-viewport {
+    margin-left: 0 !important;
+  }
+}
+
+.accounts-main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Page Container with Generous Spacing */
+.accounts-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.75rem 2rem 3rem 2rem;
+  background-color: var(--acc-bg);
+  min-height: calc(100vh - 64px);
+  box-sizing: border-box;
+}
+
+/* Header Area */
+.accounts-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .accounts-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.accounts-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.accounts-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.accounts-title {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--acc-text);
+  letter-spacing: -0.02em;
+}
+
+.accounts-risk-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.65rem;
+  background-color: var(--acc-card-high);
+  color: var(--acc-primary);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  border-radius: var(--acc-radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.accounts-subtitle {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--acc-text-muted);
+  max-width: 52rem;
+  line-height: 1.45;
+}
+
+.accounts-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-header-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 2.25rem;
+  padding: 0 0.85rem;
+  background-color: var(--acc-card-bg);
+  border: 1px solid var(--acc-border);
+  border-radius: var(--acc-radius-md);
+  color: var(--acc-text);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--acc-shadow-xs);
+  transition: all 0.2s ease;
+}
+
+.btn-header-action:hover {
+  background-color: var(--acc-card-low);
+  border-color: #cbd5e1;
+}
+
+.btn-header-action.secondary-fill {
+  background-color: var(--acc-card-high);
+  border-color: transparent;
+}
+
+.btn-header-action.secondary-fill:hover {
+  background-color: var(--acc-card-highest);
+}
+
+.btn-primary-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  height: 2.25rem;
+  padding: 0 1rem;
+  background-color: var(--acc-primary);
+  border: none;
+  border-radius: var(--acc-radius-md);
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(81, 69, 245, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-primary-credit:hover {
+  background-color: var(--acc-primary-dark);
+  transform: translateY(-1px);
+}
+
+/* Metric KPI Cards Grid */
+.accounts-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .accounts-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .accounts-kpi-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.account-kpi-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--acc-card-bg);
+  border: 1px solid var(--acc-border-light);
+  border-radius: var(--acc-radius-lg);
+  padding: 1.25rem 1.35rem;
+  box-shadow: var(--acc-shadow-xs);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  gap: 0.75rem;
+}
+
+.account-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--acc-shadow-md);
+  border-color: #cbd5e1;
+}
+
+.account-kpi-card.active-filter {
+  border-color: var(--acc-primary);
+  box-shadow: 0 0 0 2px rgba(81, 69, 245, 0.15);
+}
+
+.account-kpi-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.account-kpi-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--acc-outline);
+}
+
+.account-kpi-icon-pod {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--acc-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.account-kpi-icon-pod.primary {
+  background-color: var(--acc-card-high);
+  color: var(--acc-primary);
+}
+
+.account-kpi-icon-pod.tertiary {
+  background-color: var(--acc-card-high);
+  color: var(--acc-tertiary);
+}
+
+.account-kpi-icon-pod.danger {
+  background-color: var(--acc-danger-bg);
+  color: var(--acc-danger);
+}
+
+.account-kpi-middle {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.account-kpi-number {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--acc-text);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.account-kpi-number.danger {
+  color: var(--acc-danger);
+}
+
+.account-kpi-tag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--acc-radius-full);
+}
+
+.account-kpi-tag.danger {
+  background-color: var(--acc-danger-bg);
+  color: var(--acc-danger);
+}
+
+.account-kpi-tag.safe {
+  background-color: var(--acc-card-high);
+  color: var(--acc-text);
+}
+
+.account-kpi-subtitle {
+  font-size: 0.75rem;
+  color: var(--acc-text-muted);
+  margin-top: 0.25rem;
+}
+
+.account-kpi-track {
+  width: 100%;
+  height: 6px;
+  border-radius: var(--acc-radius-full);
+  background-color: var(--acc-card-high);
+  overflow: hidden;
+  display: flex;
+}
+
+.account-kpi-bar {
+  height: 100%;
+  border-radius: var(--acc-radius-full);
+}
+
+.account-kpi-bar.primary {
+  background-color: var(--acc-primary);
+}
+
+.account-kpi-bar.danger {
+  background-color: var(--acc-danger);
+}
+
+/* Master-Detail Dual Column Layout */
+.accounts-workspace-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+@media (min-width: 1200px) {
+  .accounts-workspace-grid {
+    grid-template-columns: 58% 42%;
+  }
+}
+
+/* Left Pane: Table Directory & Filters */
+.accounts-table-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--acc-card-bg);
+  border: 1px solid var(--acc-border-light);
+  border-radius: var(--acc-radius-lg);
+  padding: 1.25rem;
+  box-shadow: var(--acc-shadow-xs);
+}
+
+/* Filter Tabs & Quick Action Controls */
+.accounts-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.accounts-status-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--acc-card-low);
+  padding: 0.25rem;
+  border-radius: var(--acc-radius-md);
+  overflow-x: auto;
+}
+
+.account-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--acc-radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--acc-text-muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.account-tab-btn:hover {
+  color: var(--acc-text);
+}
+
+.account-tab-btn.active {
+  background-color: var(--acc-card-bg);
+  color: var(--acc-primary);
+  box-shadow: var(--acc-shadow-xs);
+}
+
+.account-tab-badge-circle {
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 50%;
+  background-color: var(--acc-danger);
+  color: #ffffff;
+  font-size: 0.625rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accounts-quick-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-quick-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--acc-radius-md);
+  border: none;
+  background: transparent;
+  color: var(--acc-outline);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-quick-icon:hover {
+  background-color: var(--acc-card-low);
+  color: var(--acc-text);
+}
+
+/* Search Row */
+.accounts-search-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.accounts-search-input-pod {
+  position: relative;
+  flex: 1;
+}
+
+.accounts-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--acc-outline);
+  font-size: 1.125rem;
+  pointer-events: none;
+}
+
+.accounts-search-input {
+  width: 100%;
+  height: 2.25rem;
+  padding: 0 0.75rem 0 2.25rem;
+  border-radius: var(--acc-radius-md);
+  border: 1px solid var(--acc-border);
+  background-color: var(--acc-card-low);
+  color: var(--acc-text);
+  font-size: 0.75rem;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.accounts-search-input:focus {
+  outline: none;
+  background-color: var(--acc-card-bg);
+  border-color: var(--acc-primary);
+  box-shadow: 0 0 0 2px rgba(81, 69, 245, 0.15);
+}
+
+.btn-filter-trigger {
+  height: 2.25rem;
+  padding: 0 0.75rem;
+  border-radius: var(--acc-radius-md);
+  border: 1px solid var(--acc-border);
+  background-color: var(--acc-card-low);
+  color: var(--acc-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-filter-trigger:hover {
+  background-color: var(--acc-card-high);
+}
+
+/* High-Density Data Table */
+.accounts-table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.accounts-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.75rem;
+  min-width: 760px;
+}
+
+.accounts-table th {
+  background-color: var(--acc-card-low);
+  color: var(--acc-outline);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--acc-border);
+  white-space: nowrap;
+}
+
+.accounts-table td {
+  padding: 0.75rem 0.75rem;
+  border-bottom: 1px solid var(--acc-border-light);
+  color: var(--acc-text);
+  vertical-align: middle;
+}
+
+.accounts-table tr.account-row {
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.accounts-table tr.account-row:hover {
+  background-color: rgba(240, 243, 255, 0.75);
+}
+
+.accounts-table tr.account-row.selected {
+  background-color: var(--acc-card-high);
+  border-left: 3px solid var(--acc-primary);
+}
+
+.accounts-table tr.account-row.breached-row {
+  background-color: rgba(255, 218, 214, 0.25);
+}
+
+/* Account Info Cluster */
+.account-cell-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.account-avatar-box {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--acc-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.6875rem;
+  flex-shrink: 0;
+}
+
+.account-avatar-box.prime {
+  background-color: var(--acc-primary);
+  color: #ffffff;
+}
+
+.account-avatar-box.standard {
+  background-color: var(--acc-card-high);
+  color: var(--acc-text);
+}
+
+.account-avatar-box.enterprise {
+  background-color: var(--acc-secondary-container);
+  color: #0e1a3b;
+}
+
+.account-avatar-box.danger {
+  background-color: var(--acc-danger-bg);
+  color: var(--acc-danger);
+}
+
+.account-info-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.account-name-text {
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--acc-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.account-code-sub {
+  font-size: 0.6875rem;
+  color: var(--acc-text-muted);
+}
+
+.terms-pill {
+  background-color: var(--acc-card-low);
+  color: var(--acc-text);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--acc-radius-sm);
+  white-space: nowrap;
+}
+
+.outstanding-figure {
+  font-weight: 700;
+  font-size: 0.75rem;
+  color: var(--acc-text);
+}
+
+.outstanding-figure.breached {
+  color: var(--acc-danger);
+}
+
+.outstanding-mini-track {
+  width: 4rem;
+  height: 4px;
+  border-radius: var(--acc-radius-full);
+  background-color: var(--acc-card-high);
+  margin-top: 3px;
+  overflow: hidden;
+}
+
+.outstanding-mini-bar {
+  height: 100%;
+  background-color: var(--acc-primary);
+}
+
+.outstanding-mini-bar.breached {
+  background-color: var(--acc-danger);
+}
+
+.outstanding-subtext {
+  font-size: 0.625rem;
+  color: var(--acc-text-muted);
+  margin-top: 2px;
+}
+
+.outstanding-subtext.breached {
+  color: var(--acc-danger);
+  font-weight: 700;
+}
+
+/* Ageing Chips Spectrum */
+.ageing-chips-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.ageing-chip {
+  padding: 0.15rem 0.35rem;
+  border-radius: var(--acc-radius-sm);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  background-color: var(--acc-card-low);
+  color: var(--acc-text);
+  white-space: nowrap;
+}
+
+.ageing-chip.secondary {
+  background-color: rgba(201, 211, 254, 0.6);
+  color: #3b4569;
+}
+
+.ageing-chip.danger {
+  background-color: var(--acc-danger-bg);
+  color: var(--acc-danger);
+  font-weight: 700;
+}
+
+.ageing-spectrum-summary {
+  font-size: 0.6875rem;
+  color: var(--acc-outline);
+}
+
+/* Status Badges */
+.acc-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--acc-radius-full);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.acc-status-pill.active {
+  background-color: var(--acc-card-low);
+  color: var(--acc-primary);
+}
+
+.acc-status-pill.danger {
+  background-color: var(--acc-danger-bg);
+  color: var(--acc-danger);
+}
+
+.acc-status-pill.warning {
+  background-color: var(--acc-card-high);
+  color: var(--acc-text);
+}
+
+.acc-status-pill.healthy {
+  background-color: var(--acc-card-low);
+  color: var(--acc-text);
+}
+
+/* Table Row Action Buttons */
+.btn-table-action {
+  height: 1.75rem;
+  padding: 0 0.55rem;
+  border-radius: var(--acc-radius-sm);
+  border: none;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.btn-table-action.primary {
+  background-color: var(--acc-primary);
+  color: #ffffff;
+}
+
+.btn-table-action.primary:hover {
+  background-color: var(--acc-primary-dark);
+}
+
+.btn-table-action.danger {
+  background-color: var(--acc-card-high);
+  color: var(--acc-danger);
+}
+
+.btn-table-action.danger:hover {
+  background-color: var(--acc-danger-bg);
+}
+
+.btn-table-action.secondary {
+  background-color: var(--acc-card-low);
+  color: var(--acc-text);
+}
+
+.btn-table-action.secondary:hover {
+  background-color: var(--acc-card-high);
+}
+
+/* Table Pagination */
+.accounts-pagination-footer {
+  padding-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--acc-border-light);
+  font-size: 0.75rem;
+  color: var(--acc-text-muted);
+}
+
+.pagination-step-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.btn-step-page {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--acc-radius-sm);
+  border: 1px solid var(--acc-border);
+  background-color: var(--acc-card-low);
+  color: var(--acc-text);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-step-page:hover:not(:disabled) {
+  background-color: var(--acc-card-high);
+}
+
+.btn-step-page.active {
+  background-color: var(--acc-primary);
+  color: #ffffff;
+  border-color: var(--acc-primary);
+}
+
+.btn-step-page:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* RIGHT PANE: 360° Account Credit & Live Ledger Detail */
+.account-detail-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: var(--acc-card-bg);
+  border: 1px solid var(--acc-border-light);
+  border-radius: var(--acc-radius-lg);
+  padding: 1.25rem 1.35rem;
+  box-shadow: var(--acc-shadow-xs);
+  position: sticky;
+  top: 5rem;
+}
+
+/* Detail Hero Header */
+.detail-hero-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.detail-identity-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.detail-avatar-box {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--acc-radius-md);
+  background-color: var(--acc-primary);
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--acc-shadow-xs);
+  flex-shrink: 0;
+}
+
+.detail-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.detail-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.detail-account-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--acc-text);
+  margin: 0;
+}
+
+.detail-terms-badge {
+  background-color: var(--acc-card-low);
+  color: var(--acc-primary);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--acc-radius-full);
+}
+
+.detail-entity-subtext {
+  font-size: 0.6875rem;
+  color: var(--acc-text-muted);
+}
+
+.detail-quick-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Detail Tabs */
+.detail-tabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--acc-card-low);
+  padding: 0.25rem;
+  border-radius: var(--acc-radius-md);
+}
+
+.detail-tab-btn {
+  flex: 1;
+  padding: 0.4rem 0.25rem;
+  border-radius: var(--acc-radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--acc-text-muted);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.detail-tab-btn:hover {
+  color: var(--acc-text);
+}
+
+.detail-tab-btn.active {
+  background-color: var(--acc-card-bg);
+  color: var(--acc-text);
+  font-weight: 700;
+  box-shadow: var(--acc-shadow-xs);
+}
+
+/* Sanctioned Credit Utilization Gauge Card */
+.credit-gauge-card {
+  background-color: var(--acc-card-low);
+  border-radius: var(--acc-radius-md);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.gauge-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.gauge-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--acc-outline);
+}
+
+.gauge-pct-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--acc-primary);
+}
+
+.gauge-pct-badge.breached {
+  color: var(--acc-danger);
+}
+
+.gauge-progress-track {
+  width: 100%;
+  height: 0.625rem;
+  background-color: var(--acc-card-high);
+  border-radius: var(--acc-radius-full);
+  overflow: hidden;
+}
+
+.gauge-progress-fill {
+  height: 100%;
+  background-color: var(--acc-primary);
+  border-radius: var(--acc-radius-full);
+  transition: width 0.3s ease;
+}
+
+.gauge-progress-fill.breached {
+  background-color: var(--acc-danger);
+}
+
+.gauge-stats-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  padding-top: 0.25rem;
+}
+
+.gauge-stat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.gauge-stat-label {
+  font-size: 0.6875rem;
+  color: var(--acc-outline);
+}
+
+.gauge-stat-val {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--acc-text);
+}
+
+.gauge-stat-val.primary {
+  color: var(--acc-primary);
+}
+
+.gauge-stat-val.danger {
+  color: var(--acc-danger);
+}
+
+.bank-guarantee-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 0.6875rem;
+  color: var(--acc-text-muted);
+}
+
+/* Outstanding Ageing Analysis Card */
+.ageing-analysis-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.ageing-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ageing-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--acc-outline);
+}
+
+.ageing-standing-tag {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--acc-primary);
+}
+
+.ageing-standing-tag.danger {
+  color: var(--acc-danger);
+}
+
+.ageing-stacked-bar {
+  width: 100%;
+  height: 0.75rem;
+  border-radius: var(--acc-radius-full);
+  background-color: var(--acc-card-high);
+  overflow: hidden;
+  display: flex;
+}
+
+.ageing-segment {
+  height: 100%;
+}
+
+.ageing-grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.35rem;
+  text-align: center;
+}
+
+.ageing-box {
+  background-color: var(--acc-card-low);
+  padding: 0.45rem 0.25rem;
+  border-radius: var(--acc-radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.ageing-box-header {
+  font-size: 0.5625rem;
+  color: var(--acc-outline);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.ageing-box-amt {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--acc-text);
+}
+
+.ageing-box-sub {
+  font-size: 0.5625rem;
+  color: var(--acc-primary);
+}
+
+.ageing-box-sub.secondary {
+  color: var(--acc-tertiary);
+}
+
+.ageing-box-sub.outline {
+  color: var(--acc-outline);
+}
+
+.ageing-dispatch-note {
+  background-color: var(--acc-card-low);
+  border-radius: var(--acc-radius-sm);
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--acc-text);
+}
+
+/* Recent Transactions Live Feed */
+.recent-transactions-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.transactions-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.transactions-title {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--acc-outline);
+}
+
+.btn-view-all-tx {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--acc-primary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-view-all-tx:hover {
+  text-decoration: underline;
+}
+
+.transactions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.transaction-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--acc-radius-md);
+  background-color: var(--acc-card-low);
+  transition: background-color 0.15s ease;
+}
+
+.transaction-row:hover {
+  background-color: var(--acc-card-high);
+}
+
+.transaction-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.transaction-icon-pod {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: var(--acc-radius-sm);
+  background-color: var(--acc-card-high);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--acc-text);
+}
+
+.transaction-icon-pod.payment {
+  background-color: var(--acc-card-highest);
+  color: var(--acc-primary);
+}
+
+.transaction-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.transaction-title-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--acc-text);
+}
+
+.transaction-subtext {
+  font-size: 0.6875rem;
+  color: var(--acc-outline);
+}
+
+.transaction-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.1rem;
+}
+
+.transaction-amount {
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.transaction-amount.debit {
+  color: var(--acc-danger);
+}
+
+.transaction-amount.credit {
+  color: var(--acc-primary);
+}
+
+.transaction-amount.danger {
+  color: var(--acc-danger);
+}
+
+.transaction-bal {
+  font-size: 0.625rem;
+  color: var(--acc-outline);
+}
+
+/* Operational Credit Controls & Action Triggers */
+.detail-bottom-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding-top: 0.5rem;
+}
+
+.actions-2button-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.btn-control-secondary {
+  height: 2.25rem;
+  padding: 0 0.5rem;
+  border-radius: var(--acc-radius-md);
+  border: 1px solid var(--acc-border);
+  background-color: var(--acc-card-low);
+  color: var(--acc-text);
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-control-secondary:hover {
+  background-color: var(--acc-card-high);
+}
+
+.btn-control-danger {
+  height: 2.25rem;
+  padding: 0 0.5rem;
+  border-radius: var(--acc-radius-md);
+  border: 1px solid var(--acc-danger-border);
+  background-color: var(--acc-danger-bg);
+  color: var(--acc-danger-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-control-danger:hover {
+  opacity: 0.9;
+}
+
+.btn-control-primary-wide {
+  height: 2.25rem;
+  width: 100%;
+  border-radius: var(--acc-radius-md);
+  border: none;
+  background-color: var(--acc-primary);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(81, 69, 245, 0.25);
+  transition: all 0.2s ease;
+}
+
+.btn-control-primary-wide:hover {
+  background-color: var(--acc-primary-dark);
+}
+
+.billing-statement-reminder-box {
+  background-color: var(--acc-card-low);
+  border-radius: var(--acc-radius-sm);
+  padding: 0.5rem 0.65rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.6875rem;
+  color: var(--acc-text-muted);
+  line-height: 1.35;
+}
+
+/* Modals Overlay & Styles */
+.acc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 28, 45, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.acc-modal-card {
+  background-color: var(--acc-card-bg);
+  border-radius: var(--acc-radius-xl);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 38rem;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.acc-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--acc-border-light);
+}
+
+.acc-modal-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--acc-text);
+}
+
+.acc-modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.acc-modal-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--acc-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  background-color: var(--acc-card-low);
+}

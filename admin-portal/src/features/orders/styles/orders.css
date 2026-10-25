@@ -1,0 +1,1798 @@
+/* ==========================================================================
+   HireD Admin Operations Portal — Orders Management Styles
+   Spacious, modern, and aligned with Stitch design reference 5._orders_management
+   ========================================================================== */
+
+:root {
+  --order-bg: #f9f9ff;
+  --order-surface: #ffffff;
+  --order-surface-low: #f0f3ff;
+  --order-surface-container: #e8eeff;
+  --order-surface-high: #dfe8ff;
+  --order-surface-highest: #d9e3fa;
+  --order-text-main: #121c2d;
+  --order-text-muted: #464556;
+  --order-text-outline: #777588;
+  --order-primary: #3721de;
+  --order-primary-container: #5145f5;
+  --order-primary-fixed: #e2dfff;
+  --order-secondary: #535d82;
+  --order-secondary-container: #c9d3fe;
+  --order-tertiary: #3c4a73;
+  --order-tertiary-fixed: #dbe1ff;
+  --order-error: #ba1a1a;
+  --order-error-container: #ffdad6;
+  --order-error-text: #93000a;
+  --order-success: #15803d;
+  --order-success-bg: #dcfce7;
+  --order-font-headline: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --order-font-body: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+/* Page Shell & Viewport */
+.orders-page-shell {
+  min-height: 100vh;
+  background-color: var(--order-bg);
+  font-family: var(--order-font-body);
+  color: var(--order-text-main);
+  display: flex;
+}
+
+.orders-content-viewport {
+  flex: 1;
+  min-width: 0;
+  margin-left: 260px;
+  transition: margin-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.orders-content-viewport.sidebar-collapsed {
+  margin-left: 80px;
+}
+
+@media (max-width: 1024px) {
+  .orders-content-viewport {
+    margin-left: 0 !important;
+  }
+}
+
+.orders-main-container {
+  padding: 2rem 2.25rem 3.5rem;
+  padding-top: calc(4.25rem + 1.25rem);
+  flex: 1;
+}
+
+.orders-page-wrapper {
+  max-width: 1720px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Generous breathable gap between all major page blocks */
+}
+
+/* ==========================================================================
+   Header & Action Bar
+   ========================================================================== */
+.orders-header-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+@media (min-width: 1024px) {
+  .orders-header-row {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.orders-title-cluster {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.orders-h1-group {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.orders-title {
+  font-family: var(--order-font-headline);
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--order-text-main);
+  margin: 0;
+}
+
+.orders-live-pill {
+  background-color: var(--order-surface-container);
+  color: var(--order-primary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.orders-subtitle {
+  font-size: 0.875rem;
+  color: var(--order-text-muted);
+  margin: 0;
+}
+
+.orders-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.orders-time-toggle-group {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--order-surface);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 8px;
+  padding: 3px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.orders-time-toggle-btn {
+  height: 32px;
+  padding: 0 0.95rem;
+  border: none;
+  background: transparent;
+  font-size: 0.785rem;
+  font-weight: 600;
+  color: var(--order-text-muted);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.orders-time-toggle-btn.active {
+  background-color: var(--order-primary-container);
+  color: #ffffff;
+  box-shadow: 0 1px 4px rgba(81, 69, 245, 0.2);
+}
+
+.orders-btn-secondary {
+  height: 38px;
+  padding: 0 1rem;
+  background-color: var(--order-surface);
+  color: var(--order-text-main);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.orders-btn-secondary:hover {
+  background-color: var(--order-surface-low);
+}
+
+.orders-btn-primary {
+  height: 38px;
+  padding: 0 1.25rem;
+  background-color: var(--order-primary-container);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 2px 6px rgba(81, 69, 245, 0.25);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.orders-btn-primary:hover {
+  opacity: 0.94;
+}
+
+/* ==========================================================================
+   Summary KPI Cards (4 in a Row)
+   ========================================================================== */
+.orders-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.35rem;
+}
+
+@media (min-width: 640px) {
+  .orders-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.35rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .orders-kpi-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.order-kpi-card {
+  background-color: var(--order-surface);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.order-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.06);
+}
+
+.order-kpi-card.selected {
+  border-color: var(--order-primary-container);
+  box-shadow: 0 0 0 1.5px var(--order-primary-container);
+}
+
+.order-kpi-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.order-kpi-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  color: var(--order-text-outline);
+}
+
+.order-kpi-icon-pod {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.order-kpi-icon-pod.pod-blue {
+  background-color: var(--order-surface-container);
+  color: var(--order-primary);
+}
+
+.order-kpi-icon-pod.pod-amber {
+  background-color: var(--order-surface-high);
+  color: var(--order-primary-container);
+}
+
+.order-kpi-icon-pod.pod-teal {
+  background-color: var(--order-surface-container);
+  color: var(--order-tertiary);
+}
+
+.order-kpi-icon-pod.pod-red {
+  background-color: rgba(255, 218, 214, 0.6);
+  color: var(--order-error);
+}
+
+.order-kpi-value-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.65rem;
+  margin-bottom: 0.45rem;
+}
+
+.order-kpi-big-number {
+  font-family: var(--order-font-headline);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--order-text-main);
+  line-height: 1;
+}
+
+.order-kpi-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+.badge-trending-up {
+  background-color: var(--order-surface-high);
+  color: var(--order-primary);
+}
+
+.badge-requires-action {
+  background-color: var(--order-secondary-container);
+  color: var(--order-text-main);
+}
+
+.badge-active-status {
+  background-color: var(--order-tertiary-fixed);
+  color: var(--order-tertiary);
+}
+
+.badge-rejected-rate {
+  background-color: var(--order-error-container);
+  color: var(--order-error-text);
+}
+
+.order-kpi-footer-row {
+  font-size: 0.785rem;
+  color: var(--order-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.order-kpi-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+.dot-blue { background-color: var(--order-primary-container); }
+.dot-amber { background-color: var(--order-secondary); }
+.dot-teal { background-color: var(--order-tertiary); }
+.dot-red { background-color: var(--order-error); }
+
+/* ==========================================================================
+   Master-Detail Grid (Two Columns with Generous Gap)
+   ========================================================================== */
+.orders-master-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+@media (min-width: 1280px) {
+  .orders-master-detail-grid {
+    grid-template-columns: minmax(0, 1.45fr) minmax(440px, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1600px) {
+  .orders-master-detail-grid {
+    grid-template-columns: minmax(0, 1.6fr) minmax(470px, 1fr);
+    gap: 2.25rem;
+  }
+}
+
+/* ==========================================================================
+   Left Column: Orders Register
+   ========================================================================== */
+.orders-register-card {
+  background-color: var(--order-surface);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 14px;
+  padding: 1.35rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+/* Filter Pipeline Tabs */
+.orders-pipeline-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.order-pipeline-tab-btn {
+  padding: 0.45rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.785rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--order-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.15s ease;
+}
+
+.order-pipeline-tab-btn:hover {
+  background-color: var(--order-surface-low);
+  color: var(--order-text-main);
+}
+
+.order-pipeline-tab-btn.active {
+  background-color: var(--order-primary-container);
+  color: #ffffff;
+  box-shadow: 0 1px 3px rgba(81, 69, 245, 0.2);
+}
+
+.tab-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 9999px;
+  background-color: var(--order-secondary-container);
+  color: var(--order-text-main);
+}
+
+.order-pipeline-tab-btn.active .tab-badge {
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* Search & Vehicle Filter Controls */
+.orders-filter-controls-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .orders-filter-controls-row {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.orders-search-pod {
+  position: relative;
+  flex: 1;
+  width: 100%;
+}
+
+.orders-search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--order-text-outline);
+  font-size: 18px;
+  pointer-events: none;
+}
+
+.orders-search-input {
+  width: 100%;
+  height: 38px;
+  padding-left: 2.35rem;
+  padding-right: 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--order-surface-high);
+  background-color: var(--order-surface-low);
+  color: var(--order-text-main);
+  font-size: 0.8125rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: all 0.15s ease;
+}
+
+.orders-search-input:focus {
+  background-color: var(--order-surface);
+  border-color: var(--order-primary-container);
+  box-shadow: 0 0 0 2px rgba(81, 69, 245, 0.15);
+}
+
+.orders-vehicle-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.orders-select-wrapper {
+  position: relative;
+}
+
+.orders-vehicle-select {
+  height: 38px;
+  padding-left: 0.85rem;
+  padding-right: 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--order-surface-high);
+  background-color: var(--order-surface-low);
+  color: var(--order-text-main);
+  font-size: 0.785rem;
+  font-weight: 600;
+  appearance: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.orders-select-arrow {
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--order-text-outline);
+  font-size: 16px;
+  pointer-events: none;
+}
+
+.orders-btn-tune {
+  height: 38px;
+  width: 38px;
+  border-radius: 8px;
+  border: 1px solid var(--order-surface-high);
+  background-color: var(--order-surface-low);
+  color: var(--order-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.orders-btn-tune:hover {
+  background-color: var(--order-surface-container);
+  color: var(--order-text-main);
+}
+
+/* ==========================================================================
+   High-Density Table Styles
+   ========================================================================== */
+.orders-table-wrapper {
+  border-radius: 10px;
+  overflow-x: auto;
+  border: 1px solid var(--order-surface-high);
+  background-color: var(--order-surface);
+}
+
+.orders-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.8125rem;
+}
+
+.orders-table thead tr {
+  background-color: var(--order-surface-low);
+  color: var(--order-text-muted);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  height: 40px;
+  border-bottom: 1px solid var(--order-surface-high);
+}
+
+.orders-table th {
+  padding: 0.5rem 0.85rem;
+  white-space: nowrap;
+}
+
+.orders-table tbody tr {
+  border-bottom: 1px solid var(--order-surface-high);
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.orders-table tbody tr:hover {
+  background-color: var(--order-surface-low);
+}
+
+.orders-table tbody tr.row-selected {
+  background-color: #f0f3ff !important;
+}
+
+.orders-table td {
+  padding: 0.75rem 0.85rem;
+  vertical-align: middle;
+}
+
+/* Column Elements */
+.order-id-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.order-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: var(--order-primary-container);
+  animation: orderPulse 1.8s infinite;
+}
+
+@keyframes orderPulse {
+  0% { transform: scale(0.9); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.5; }
+  100% { transform: scale(0.9); opacity: 1; }
+}
+
+.order-id-txt {
+  font-weight: 700;
+  color: var(--order-primary);
+  font-size: 0.875rem;
+}
+
+.order-company-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-company-name {
+  font-weight: 700;
+  color: var(--order-text-main);
+  max-width: 140px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-company-sub {
+  font-size: 0.6875rem;
+  color: var(--order-text-muted);
+}
+
+.order-route-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.order-route-locations {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-weight: 600;
+  color: var(--order-text-main);
+}
+
+.order-route-arrow {
+  font-size: 14px;
+  color: var(--order-primary);
+}
+
+.order-route-date {
+  font-size: 0.6875rem;
+  color: var(--order-text-muted);
+}
+
+.order-vehicle-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-vehicle-title {
+  font-weight: 600;
+  color: var(--order-text-main);
+}
+
+.order-vehicle-sub {
+  font-size: 0.6875rem;
+  color: var(--order-text-muted);
+}
+
+.order-amount-bold {
+  font-family: var(--order-font-headline);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--order-text-main);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Status Pills */
+.order-status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pill-pending-review {
+  background-color: var(--order-secondary-container);
+  color: var(--order-text-main);
+}
+
+.pill-accepted {
+  background-color: var(--order-tertiary-fixed);
+  color: var(--order-tertiary);
+}
+
+.pill-converted {
+  background-color: var(--order-surface-container);
+  color: var(--order-primary);
+}
+
+.pill-rejected {
+  background-color: var(--order-error-container);
+  color: var(--order-error-text);
+}
+
+/* Actions in Table */
+.order-actions-cell {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.35rem;
+}
+
+.order-btn-action-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--order-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.order-btn-action-icon:hover {
+  background-color: var(--order-surface-container);
+  color: var(--order-primary);
+}
+
+/* Table Pagination Footer */
+.orders-pagination-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .orders-pagination-row {
+    flex-direction: row;
+  }
+}
+
+.orders-pagination-text {
+  font-size: 0.785rem;
+  color: var(--order-text-muted);
+}
+
+.orders-pagination-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.order-page-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--order-surface-low);
+  color: var(--order-text-main);
+  font-size: 0.785rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.order-page-btn:hover:not(:disabled) {
+  background-color: var(--order-surface-container);
+}
+
+.order-page-btn.active {
+  background-color: var(--order-primary-container);
+  color: #ffffff;
+}
+
+.order-page-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Right Column: Order Details & Inspection Panel
+   ========================================================================== */
+.order-detail-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: sticky;
+  top: 5.25rem;
+}
+
+.order-detail-card {
+  background-color: var(--order-surface);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-detail-empty {
+  padding: 4rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header Pod */
+.order-detail-header-pod {
+  padding: 1.25rem 1.4rem;
+  background-color: var(--order-surface-low);
+  border-bottom: 1px solid var(--order-surface-high);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.order-detail-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.order-detail-title-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.order-detail-h2 {
+  font-family: var(--order-font-headline);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--order-text-main);
+  margin: 0;
+}
+
+.order-detail-created-info {
+  font-size: 0.75rem;
+  color: var(--order-text-muted);
+  line-height: 1.3;
+}
+
+.order-detail-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.order-btn-quick-reject {
+  height: 32px;
+  padding: 0 0.85rem;
+  border-radius: 6px;
+  background-color: var(--order-surface);
+  color: var(--order-error);
+  border: 1px solid var(--order-surface-high);
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.order-btn-quick-reject:hover {
+  background-color: var(--order-error-container);
+}
+
+.order-btn-quick-accept {
+  height: 32px;
+  padding: 0 0.95rem;
+  border-radius: 6px;
+  background-color: var(--order-tertiary);
+  color: #ffffff;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.order-btn-quick-accept:hover {
+  opacity: 0.92;
+}
+
+/* Sub-Navigation Tabs */
+.order-detail-subtabs-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.order-subtab-btn {
+  padding-bottom: 0.45rem;
+  font-size: 0.785rem;
+  font-weight: 600;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--order-text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.order-subtab-btn:hover {
+  color: var(--order-text-main);
+}
+
+.order-subtab-btn.active {
+  color: var(--order-primary);
+  border-bottom-color: var(--order-primary);
+  font-weight: 700;
+}
+
+/* Detail Content Body (Generous, Breathable Gaps!) */
+.order-detail-body {
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.45rem; /* Breathable gap between every section! */
+}
+
+/* 1. Company Partner Card */
+.order-company-card {
+  padding: 0.95rem 1.15rem;
+  background-color: var(--order-surface-low);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.order-company-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.order-company-avatar-pod {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: var(--order-surface-high);
+  color: var(--order-primary);
+  font-family: var(--order-font-headline);
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.order-company-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.order-company-name-row {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.order-company-full-name {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--order-text-main);
+  line-height: 1.25;
+}
+
+.order-verified-icon {
+  font-size: 16px;
+  color: var(--order-primary);
+}
+
+.order-company-contact-txt {
+  font-size: 0.75rem;
+  color: var(--order-text-muted);
+}
+
+.order-company-tax-txt {
+  font-size: 0.6875rem;
+  color: var(--order-text-outline);
+}
+
+.order-b2b-account-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--order-primary);
+  background-color: var(--order-primary-fixed);
+  padding: 0.22rem 0.65rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* 2. Route & Map Visual Card */
+.order-route-card {
+  background-color: var(--order-surface-low);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-route-locations-wrapper {
+  padding: 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.order-waypoint-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+
+.order-waypoint-icon-pickup {
+  font-size: 18px;
+  color: var(--order-primary);
+  margin-top: 2px;
+}
+
+.order-waypoint-icon-delivery {
+  font-size: 18px;
+  color: var(--order-error);
+  margin-top: 2px;
+}
+
+.order-waypoint-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.order-waypoint-label {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--order-text-outline);
+}
+
+.order-waypoint-address {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--order-text-main);
+  line-height: 1.3;
+}
+
+.order-waypoint-time {
+  font-size: 0.725rem;
+  color: var(--order-text-muted);
+}
+
+.order-route-connector-line {
+  margin-left: 8px;
+  padding-left: 1rem;
+  border-left: 2px dashed var(--order-surface-high);
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+}
+
+.order-distance-badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--order-secondary);
+  background-color: var(--order-secondary-container);
+  padding: 0.18rem 0.55rem;
+  border-radius: 4px;
+}
+
+.order-map-image-box {
+  position: relative;
+  width: 100%;
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--order-surface-high);
+}
+
+.order-map-hud-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(18, 28, 45, 0.85), transparent);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+}
+
+.order-map-hud-left {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #ffffff;
+  font-size: 0.785rem;
+  font-weight: 600;
+}
+
+.order-map-hud-right {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: var(--order-text-main);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* 3. Specifications & Cargo Grid (2 equal columns) */
+.order-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.order-spec-card {
+  padding: 0.85rem 1rem;
+  background-color: var(--order-surface-low);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.35rem;
+  min-height: 96px;
+  box-sizing: border-box;
+}
+
+.order-spec-heading {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--order-text-outline);
+}
+
+.order-spec-value-bold {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--order-text-main);
+  line-height: 1.25;
+}
+
+.order-spec-desc {
+  font-size: 0.725rem;
+  color: var(--order-text-muted);
+  line-height: 1.3;
+}
+
+.order-spec-tag {
+  align-self: flex-start;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  margin-top: 0.2rem;
+}
+
+.tag-non-hazardous {
+  background-color: var(--order-tertiary-fixed);
+  color: var(--order-tertiary);
+}
+
+.tag-fleet-nearby {
+  background-color: var(--order-surface-high);
+  color: var(--order-primary);
+}
+
+/* 4. Commercials & Payment Terms */
+.order-commercials-card {
+  padding: 0.95rem 1.15rem;
+  background-color: var(--order-surface-low);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.order-commercials-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.order-commercials-heading {
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  color: var(--order-text-outline);
+}
+
+.order-commercials-amount-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.order-commercials-price {
+  font-family: var(--order-font-headline);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--order-primary);
+}
+
+.order-commercials-tax-txt {
+  font-size: 0.75rem;
+  color: var(--order-text-muted);
+}
+
+.order-commercials-terms-txt {
+  font-size: 0.725rem;
+  color: var(--order-text-muted);
+}
+
+.order-verified-quote-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  background-color: var(--order-secondary-container);
+  color: var(--order-text-main);
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* 5. Special Dock Instructions */
+.order-instructions-box {
+  padding: 0.85rem 1.15rem;
+  background-color: var(--order-surface-low);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 10px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.order-instructions-icon {
+  font-size: 18px;
+  color: var(--order-secondary);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.order-instructions-texts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.order-instructions-title {
+  font-size: 0.785rem;
+  font-weight: 700;
+  color: var(--order-text-main);
+}
+
+.order-instructions-content {
+  font-size: 0.725rem;
+  color: var(--order-text-muted);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* 6. Context Flow Reference Card */
+.order-contract-ref-card {
+  padding: 0.65rem 0.85rem;
+  background-color: var(--order-surface-container);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.order-contract-icon-box {
+  width: 40px;
+  height: 30px;
+  border-radius: 6px;
+  background-color: var(--order-surface-high);
+  color: var(--order-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.order-contract-texts {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-contract-name {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--order-primary);
+}
+
+.order-contract-id {
+  font-size: 0.6875rem;
+  color: var(--order-text-muted);
+}
+
+/* 7. Bottom Action Footer */
+.order-detail-footer-actions {
+  padding: 1.15rem 1.4rem;
+  background-color: var(--order-surface-low);
+  border-top: 1px solid var(--order-surface-high);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .order-detail-footer-actions {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.order-btn-accept-trip {
+  flex: 1;
+  height: 44px;
+  border-radius: 8px;
+  background-color: var(--order-primary-container);
+  color: #ffffff;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(81, 69, 245, 0.25);
+  transition: opacity 0.15s ease;
+}
+
+.order-btn-accept-trip:hover {
+  opacity: 0.94;
+}
+
+.order-btn-reject-footer {
+  height: 44px;
+  padding: 0 1.25rem;
+  border-radius: 8px;
+  background-color: var(--order-surface);
+  color: var(--order-error);
+  border: 1px solid var(--order-surface-high);
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.order-btn-reject-footer:hover {
+  background-color: var(--order-error-container);
+}
+
+/* ==========================================================================
+   Modals: Common Backdrop & Custom Dialogs
+   ========================================================================== */
+.order-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(18, 28, 45, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.order-modal-card {
+  width: 100%;
+  max-width: 580px;
+  background-color: var(--order-surface);
+  border-radius: 14px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-modal-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--order-surface-high);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.order-modal-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.order-modal-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: var(--order-surface-high);
+  color: var(--order-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+}
+
+.order-modal-icon.icon-danger {
+  background-color: rgba(255, 218, 214, 0.5);
+  color: var(--order-error);
+}
+
+.order-modal-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--order-text-main);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.order-modal-sub {
+  font-size: 0.775rem;
+  color: var(--order-text-muted);
+  margin: 0;
+  margin-top: 0.15rem;
+}
+
+.order-modal-close-btn {
+  background: none;
+  border: none;
+  color: var(--order-text-outline);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.order-modal-close-btn:hover {
+  color: var(--order-text-main);
+}
+
+.order-modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.order-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  border-top: 1px solid var(--order-surface-high);
+  padding-top: 1.15rem;
+}
+
+.order-btn-modal-cancel {
+  height: 40px;
+  padding: 0 1.15rem;
+  background-color: var(--order-surface-low);
+  color: var(--order-text-muted);
+  border: 1px solid var(--order-surface-high);
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.order-btn-modal-submit {
+  height: 40px;
+  padding: 0 1.25rem;
+  background-color: var(--order-primary-container);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(81, 69, 245, 0.25);
+}
+
+.order-btn-modal-danger {
+  height: 40px;
+  padding: 0 1.25rem;
+  background-color: var(--order-error);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   Modal Forms & 2-Column Driver Assignment Grid
+   Spacious, clear typography, separated lines, distinct radio selection
+   ========================================================================== */
+.order-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.order-form-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--order-text-muted);
+}
+
+.order-form-label span.req {
+  color: var(--order-error);
+}
+
+.order-form-input,
+.order-form-select,
+.order-form-textarea {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--order-surface-high);
+  border-radius: 8px;
+  background-color: var(--order-surface-low);
+  font-family: var(--order-font-body);
+  font-size: 0.8125rem;
+  color: var(--order-text-main);
+  box-sizing: border-box;
+  transition: all 0.15s ease;
+}
+
+.order-form-input:focus,
+.order-form-select:focus,
+.order-form-textarea:focus {
+  outline: none;
+  background-color: var(--order-surface);
+  border-color: var(--order-primary-container);
+  box-shadow: 0 0 0 2px rgba(81, 69, 245, 0.2);
+}
+
+.order-form-textarea {
+  resize: vertical;
+  min-height: 75px;
+}
+
+.order-form-row-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .order-form-row-2col {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Dispatch Driver Selection Grid */
+.driver-assign-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.driver-assign-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.driver-assign-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--order-text-main);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.driver-assign-subtitle {
+  font-size: 0.725rem;
+  color: var(--order-text-muted);
+}
+
+.driver-assign-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .driver-assign-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.driver-assign-card {
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1.5px solid var(--order-surface-high);
+  background-color: var(--order-surface-low);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  box-sizing: border-box;
+}
+
+.driver-assign-card:hover {
+  border-color: var(--order-primary-fixed);
+  background-color: var(--order-surface);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.driver-assign-card.selected {
+  border-color: var(--order-primary-container);
+  background-color: #f7f6ff;
+  box-shadow: 0 0 0 1px var(--order-primary-container), 0 3px 10px rgba(81, 69, 245, 0.12);
+}
+
+.driver-radio-input {
+  margin-top: 3px;
+  accent-color: var(--order-primary-container);
+  cursor: pointer;
+}
+
+.driver-card-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 1.5px solid var(--order-surface-high);
+}
+
+.driver-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.driver-card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+
+.driver-card-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--order-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.driver-rating-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #b45309;
+  background-color: #fef3c7;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  flex-shrink: 0;
+}
+
+.driver-card-specs {
+  font-size: 0.725rem;
+  color: var(--order-text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.driver-card-truck {
+  font-weight: 600;
+  color: var(--order-text-main);
+}
+
+.driver-card-plate {
+  color: var(--order-text-outline);
+}
+
+.driver-card-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+  padding-top: 0.35rem;
+  border-top: 1px dashed rgba(0, 0, 0, 0.08);
+}
+
+.driver-card-location {
+  font-size: 0.6875rem;
+  color: var(--order-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.driver-eta-pill {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--order-success);
+  background-color: var(--order-success-bg);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
